@@ -7,7 +7,7 @@
 npm i @njam-data/tools
 ```
 
-## fs
+## json
 
 ```js
 import { readJson, writeJson } from '@njam-data/tools/json.js'
