@@ -1,14 +1,5 @@
 import * as fs from 'fs/promises'
 
-export async function fileExists (filepath) {
-  try {
-    await fs.access(filepath)
-    return true
-  } catch (e) {
-    return false
-  }
-}
-
 export async function readJson (filepath) {
   const data = await fs.readFile(filepath, 'utf-8')
   return JSON.parse(data)
