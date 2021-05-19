@@ -1,0 +1,26 @@
+{
+  "name": "@njam-data/tools",
+  "version": "0.0.0",
+  "description": "reusable utilities for njam data projects",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njam-data/tools.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/njam-data/tools/issues"
+  },
+  "homepage": "https://github.com/njam-data/tools#readme",
+  "dependencies": {
+    "@fast-csv/format": "^4.3.5",
+    "@fast-csv/parse": "^4.3.6",
+    "desm": "^1.1.0",
+    "pump": "^3.0.0"
+  }
+}
