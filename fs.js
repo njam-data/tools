@@ -8,3 +8,10 @@ export async function fileExists (filepath) {
     return false
   }
 }
+
+export async function mkdirp (filepath) {
+  return fs.mkdir(filepath, {
+    recursive: true,
+    force: true
+  })
+}

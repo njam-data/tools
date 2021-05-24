@@ -32,6 +32,22 @@ const readStream = createCsvReadStream(filepath)
 const writeStream = createCsvWriteStream(filepath)
 ```
 
+## s3
+
+```js
+import {
+  uploadFile,
+  downloadFile,
+  deleteFile,
+  listFiles
+} from '@njam-data/tools/s3.js'
+
+await uploadFile({ bucket, filepath, body })
+const file = await downloadFile({ bucket, filepath })
+await deleteFile({ bucket, filepath })
+const files = await listFiles({ bucket, filepath })
+```
+
 ## dirname
 
 ```js

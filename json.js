@@ -7,7 +7,7 @@ export async function readJson (filepath) {
 
 export async function writeJson (filepath, data) {
   if (!data) {
-    throw new Error(`data argument required but found ${data} when writing to ${filepath}`)
+    throw new Error(`data argument required but found data is ${data} when writing to ${filepath}`)
   }
 
   let str
