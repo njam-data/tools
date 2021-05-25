@@ -1,3 +1,4 @@
+import * as path from 'path'
 import * as fs from 'fs/promises'
 
 export async function fileExists (filepath) {
@@ -14,4 +15,36 @@ export async function mkdirp (filepath) {
     recursive: true,
     force: true
   })
+}
+
+export async function readDirs (filepath, options = {}) {
+  const { readFiles = false } = options
+  const filepaths = await fs.readdir(filepath)
+
+  return Promise.all(filepaths.map(async (filename) => {
+    const nestedFilepath = path.join(filepath, filename)
+    const stat = await fs.stat(nestedFilepath)
+    const parsedPath = await path.parse(nestedFilepath)
+
+    if (stat.isDirectory()) {
+      return readDirs(nestedFilepath, { readFiles })
+    }
+
+    if (readFiles) {
+      const file = await fs.readFile(nestedFilepath, 'utf-8')
+
+      return {
+        ...stat,
+        filepath: nestedFilepath,
+        ...parsedPath,
+        file
+      }
+    }
+
+    return {
+      ...stat,
+      filepath: nestedFilepath,
+      ...parsedPath
+    }
+  }))
 }
