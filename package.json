@@ -1,6 +1,6 @@
 {
   "name": "@njam-data/tools",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "reusable utilities for njam data projects",
   "main": "index.js",
   "type": "module",
