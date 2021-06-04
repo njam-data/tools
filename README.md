@@ -37,13 +37,17 @@ const writeStream = createCsvWriteStream(filepath)
 ```js
 import {
   uploadFile,
+  uploadJson,
   downloadFile,
+  downloadJson,
   deleteFile,
   listFiles
 } from '@njam-data/tools/s3.js'
 
 await uploadFile({ bucket, filepath, body })
+await uploadJson({ bucket, filepath, body })
 const file = await downloadFile({ bucket, filepath })
+const file = await downloadJson({ bucket, filepath })
 await deleteFile({ bucket, filepath })
 const files = await listFiles({ bucket, filepath })
 ```
@@ -55,7 +59,7 @@ import * as path from 'path'
 import * as dirname from '@njam-data/tools/dirname.js'
 
 const dataDirectory = dirname.join(import.meta.url, 'data')
-const csvDirectory = path.join(dataDirectory, 'csv)
+const csvDirectory = path.join(dataDirectory, 'csv')
 ```
 
 ## fs

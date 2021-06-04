@@ -1,3 +1,5 @@
 export * from './csv.js'
 export * from './dirname.js'
+export * from './fs.js'
 export * from './json.js'
+export * from './s3.js'
