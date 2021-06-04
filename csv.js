@@ -3,9 +3,9 @@ import { parseFile } from '@fast-csv/parse'
 import { format, writeToPath } from '@fast-csv/format'
 import pump from 'pump'
 
-export async function writeCsv (filepath, rows) {
+export async function writeCsv (filepath, rows, options = {}) {
   return new Promise((resolve, reject) => {
-    const stream = writeToPath(filepath, rows)
+    const stream = writeToPath(filepath, rows, options)
 
     stream.on('error', (error) => {
       reject(error)
@@ -17,17 +17,17 @@ export async function writeCsv (filepath, rows) {
   })
 }
 
-export function createCsvWriteStream (filepath, options) {
+export function createCsvWriteStream (filepath, options = {}) {
   const writeStream = createWriteStream(filepath)
   const formatStream = format(options)
   return pump(formatStream, writeStream)
 }
 
-export async function readCsv (filepath) {
+export async function readCsv (filepath, options = {}) {
   const rows = []
 
   return new Promise((resolve, reject) => {
-    const stream = parseFile(filepath)
+    const stream = parseFile(filepath, options)
 
     stream.on('error', (error) => {
       reject(error)
@@ -43,6 +43,6 @@ export async function readCsv (filepath) {
   })
 }
 
-export function createCsvReadStream (filepath) {
-  return parseFile(filepath)
+export function createCsvReadStream (filepath, options = {}) {
+  return parseFile(filepath, options)
 }
