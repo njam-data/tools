@@ -18,6 +18,20 @@ export async function uploadFile (options) {
   })
 }
 
+export function uploadJson (options) {
+  const {
+    bucket,
+    filepath,
+    body
+  } = options
+
+  return uploadFile({
+    bucket,
+    filepath,
+    body: JSON.stringify(body)
+  })
+}
+
 export async function downloadFile (options) {
   const {
     bucket,
@@ -38,6 +52,11 @@ export async function downloadFile (options) {
       resolve(data.toString())
     })
   })
+}
+
+export async function downloadJson (options) {
+  const str = await downloadFile(options)
+  return JSON.parse(str)
 }
 
 export async function deleteFile (options) {
