@@ -71,3 +71,38 @@ if (await fileExists(filepath)) {
   // ✅
 }
 ```
+
+## monitor
+
+```js
+import { DataPipelineMonitor } from '@njam-data/tools/monitor.js'
+
+const monitor = new DataPipelineMonitor({
+  url: 'your slack incoming webhook url'
+})
+
+// Send a basic message
+await monitor.info({
+  text: 'test',
+  url: 'https://example.com'
+})
+
+// Announce a successful data download
+await monitor.dataDownloaded({
+  text: 'test',
+  dataUrl: 'http://example.com',
+  sourceUrl: 'http://example.com'
+})
+
+// Send a warning message
+await monitor.warning({
+  text: 'test',
+  url: 'http://example.com'
+})
+
+// Send an error message, which notifies @here in the channel
+await monitor.error({
+  text: 'test',
+  url: 'http://example.com'
+})
+```

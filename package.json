@@ -23,6 +23,7 @@
     "@aws-sdk/client-s3": "^3.16.0",
     "@fast-csv/format": "^4.3.5",
     "@fast-csv/parse": "^4.3.6",
+    "@njam-data/slack-data-pipeline-monitor": "^1.0.0",
     "collect-stream": "^1.2.1",
     "desm": "^1.1.0",
     "pump": "^3.0.0"
