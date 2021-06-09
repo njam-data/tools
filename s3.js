@@ -83,7 +83,6 @@ export async function listFiles (options) {
   })
 
   return response.Contents.map((item) => {
-    console.log(item)
     return {
       filepath: item.Key
     }
