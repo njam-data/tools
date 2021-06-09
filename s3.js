@@ -1,5 +1,6 @@
 import { S3 } from '@aws-sdk/client-s3'
 import collect from 'collect-stream'
+import mime from 'mime-types'
 
 const s3 = new S3({ region: 'us-east-1' })
 
@@ -7,14 +8,16 @@ export async function uploadFile (options) {
   const {
     bucket,
     filepath,
-    body
+    body,
+    contentType = mime(filepath)
   } = options
 
   return s3.putObject({
     Bucket: bucket,
     Key: filepath,
     Body: body,
-    ACL: 'public-read'
+    ACL: 'public-read',
+    ContentType: contentType
   })
 }
 
