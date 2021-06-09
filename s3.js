@@ -1,3 +1,4 @@
+import { extname } from 'path'
 import { S3 } from '@aws-sdk/client-s3'
 import collect from 'collect-stream'
 import mime from 'mime-types'
@@ -9,7 +10,7 @@ export async function uploadFile (options) {
     bucket,
     filepath,
     body,
-    contentType = mime(filepath)
+    contentType = mime.contentType(extname(filepath))
   } = options
 
   return s3.putObject({
