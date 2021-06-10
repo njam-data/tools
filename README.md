@@ -32,6 +32,14 @@ const readStream = createCsvReadStream(filepath)
 const writeStream = createCsvWriteStream(filepath)
 ```
 
+## xlsx
+
+```js
+import { parseXlsx } from '@njam-data/tools/xlsx.js'
+
+const sheets = await parseXlsx(filepath, options)
+```
+
 ## s3
 
 ```js
