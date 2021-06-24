@@ -81,14 +81,37 @@ export async function listFiles (options) {
     filepath
   } = options
 
-  const response = await s3.listObjects({
-    Bucket: bucket,
-    Prefix: filepath
-  })
+  let files = []
+  let continuePagination = true
+  let nextMarker = null
 
-  return response.Contents.map((item) => {
+  while (continuePagination) {
+    const options = {
+      Bucket: bucket,
+      Prefix: filepath
+    }
+
+    if (nextMarker) {
+      options.Marker = nextMarker
+    }
+
+    const response = await s3.listObjects(options)
+
+    files = [...files, ...response.Contents]
+
+    if (response.IsTruncated) {
+      const length = response.Contents.length;
+      nextMarker = response.Contents[length-1].Key
+    } else {
+      continuePagination = false,
+      nextMarker = null
+    }
+  }
+
+  return files.map((item) => {
     return {
-      filepath: item.Key
+      filepath: item.Key,
+      ...item
     }
   })
 }
