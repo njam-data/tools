@@ -5,14 +5,20 @@ export async function readJson (filepath) {
   return JSON.parse(data)
 }
 
-export async function writeJson (filepath, data) {
+export async function writeJson (filepath, data, options = {}) {
   if (!data) {
     throw new Error(`data argument required but found data is ${data} when writing to ${filepath}`)
   }
 
+  const { minify = true } = options
+
   let str
   try {
-    str = JSON.stringify(data, null, 2)
+    if (minify) {
+      str = JSON.stringify(data)
+    } else {
+      str = JSON.stringify(data, null, 2)
+    }
   } catch (err) {
     throw new Error(`JSON.stringify error: \n${err}`)
   }
