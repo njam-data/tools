@@ -27,6 +27,7 @@
     "@sindresorhus/slugify": "^2.1.0",
     "collect-stream": "^1.2.1",
     "desm": "^1.1.0",
+    "lodash": "^4.17.21",
     "mime-types": "^2.1.31",
     "node-xlsx": "^0.16.1",
     "pump": "^3.0.0"

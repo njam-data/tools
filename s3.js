@@ -100,10 +100,10 @@ export async function listFiles (options) {
     files = [...files, ...response.Contents]
 
     if (response.IsTruncated) {
-      const length = response.Contents.length;
-      nextMarker = response.Contents[length-1].Key
+      const length = response.Contents.length
+      nextMarker = response.Contents[length - 1].Key
     } else {
-      continuePagination = false,
+      continuePagination = false
       nextMarker = null
     }
   }
