@@ -20,16 +20,16 @@
   },
   "homepage": "https://github.com/njam-data/tools#readme",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.28.0",
+    "@aws-sdk/client-s3": "^3.33.0",
     "@fast-csv/format": "^4.3.5",
     "@fast-csv/parse": "^4.3.6",
     "@njam-data/slack-data-pipeline-monitor": "^1.0.1",
     "@sindresorhus/slugify": "^2.1.0",
     "collect-stream": "^1.2.1",
     "desm": "^1.2.0",
-    "lodash": "^4.17.21",
+    "isomorphic-unfetch": "^3.1.0",
     "mime-types": "^2.1.32",
-    "node-xlsx": "^0.17.1",
+    "node-xlsx": "^0.17.2",
     "pump": "^3.0.0"
   },
   "devDependencies": {
