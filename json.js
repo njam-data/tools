@@ -29,3 +29,15 @@ export async function writeJson (filepath, data, options = {}) {
     throw new Error(`Error writing json file: \n${err}`)
   }
 }
+
+export async function stringifyJsonTransform (options = {}) {
+  options.writableObjectMode = true
+
+  return new Transform({
+    ...options,
+    transform(row, encoding, next) {
+      this.push(JSON.stringify(row))
+      next()
+    } 
+  })
+}

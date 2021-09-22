@@ -1,7 +1,8 @@
 import { createWriteStream } from 'fs'
+import { pipeline } from 'stream'
+
 import { parseFile, parseString } from '@fast-csv/parse'
 import { format, writeToPath } from '@fast-csv/format'
-import pump from 'pump'
 
 const defaultOptions = {
   headers: true
@@ -41,7 +42,7 @@ export async function writeCsv (filepath, rows, options = defaultOptions) {
 export function createCsvWriteStream (filepath, options = defaultOptions) {
   const writeStream = createWriteStream(filepath)
   const formatStream = format(options)
-  return pump(formatStream, writeStream)
+  return pipeline(formatStream, writeStream)
 }
 
 export async function readCsv (filepath, options = defaultOptions) {
