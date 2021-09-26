@@ -1,4 +1,4 @@
-import { toNumber } from 'lodash'
+import toNumber from 'lodash/toNumber.js'
 
 /**
  * Convert an object's properties from strings to numbers where appropriate
@@ -13,7 +13,7 @@ export function convertNumberProperties (row, options = {}) {
   for (const key in row) {
     const value = row[key]
 
-    if (convertLeadingZeroStrings && value[0] === '0') {
+    if (convertLeadingZeroStrings && value[0] === '0' && value.length > 1) {
       updatedRow[key] = value
     } else {
       const parsed = toNumber(value)
