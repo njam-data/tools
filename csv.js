@@ -39,10 +39,16 @@ export async function writeCsv (filepath, rows, options = defaultOptions) {
   })
 }
 
-export function createCsvWriteStream (filepath, options = defaultOptions) {
+function defaultCallback (err) {
+  if (err) {
+    throw err
+  }
+}
+
+export function createCsvWriteStream (filepath, options = defaultOptions, callback = defaultCallback) {
   const writeStream = createWriteStream(filepath)
   const formatStream = format(options)
-  return pipeline(formatStream, writeStream)
+  return pipeline(formatStream, writeStream, callback)
 }
 
 export async function readCsv (filepath, options = defaultOptions) {
