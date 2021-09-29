@@ -6,25 +6,45 @@ import toNumber from 'lodash/toNumber.js'
  * @param {boolean} [options.convertLeadingZeroStrings=true]
  * @returns {Object}
  */
-export function convertNumberProperties (row, options = {}) {
+export function convertNumberProperties (obj, options = {}) {
   const { convertLeadingZeroStrings = true } = options
 
-  const updatedRow = {}
-  for (const key in row) {
-    const value = row[key]
+  const updatedObj = {}
+  for (const key in obj) {
+    const value = obj[key]
 
     if (convertLeadingZeroStrings && value[0] === '0' && value.length > 1) {
-      updatedRow[key] = value
+      updatedObj[key] = value
     } else {
       const parsed = toNumber(value)
 
       if (isNaN(parsed)) {
-        updatedRow[key] = value
+        updatedObj[key] = value
       } else {
-        updatedRow[key] = parsed
+        updatedObj[key] = parsed
       }
     }
   }
 
-  return updatedRow
+  return updatedObj
+}
+
+/**
+ * Convert an object's properties from empty strings to `null`
+ * @param {Object} obj
+ * @returns {Object}
+ */
+export function convertEmptyStringsToNull (obj) {
+  const updatedObj = {}
+  for (const key in obj) {
+    const value = obj[key]
+
+    if (value && typeof value === 'string' && !value.length) {
+      updatedObj[key] = null
+    } else {
+      updatedObj[key] = value
+    }
+  }
+
+  return updatedObj
 }
