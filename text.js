@@ -10,6 +10,14 @@ export function capitalCase (phrase) {
   }).join(' ')
 }
 
-export function slugify (str, options) {
+export function slugify (str, options = {}) {
+  if (!options.separator) {
+    options.separator = '_'
+  }
+
   return slug(str, options)
+}
+
+export function unslugify (slug) {
+  return capitalCase(slug.replace('_', ' '))
 }
