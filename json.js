@@ -1,4 +1,5 @@
 import * as fs from 'fs/promises'
+import { Transform } from 'stream'
 
 export async function readJson (filepath) {
   const data = await fs.readFile(filepath, 'utf-8')
@@ -35,9 +36,9 @@ export async function stringifyJsonTransform (options = {}) {
 
   return new Transform({
     ...options,
-    transform(row, encoding, next) {
+    transform (row, encoding, next) {
       this.push(JSON.stringify(row))
       next()
-    } 
+    }
   })
 }

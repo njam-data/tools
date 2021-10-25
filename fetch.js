@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-unfetch'
+
 export { default as fetch } from 'isomorphic-unfetch'
 
 /**
@@ -25,7 +27,7 @@ export async function fetchJson (url, options) {
  * @param {string} [options.body]
  * @param {string} [options.mode]
  */
- export async function fetchText (url, options) {
+export async function fetchText (url, options) {
   const response = await fetch(url, options)
   return response.text()
 }

@@ -18,6 +18,12 @@ export function slugify (str, options = {}) {
   return slug(str, options)
 }
 
-export function unslugify (slug) {
-  return capitalCase(slug.replace('_', ' '))
+export function unslugify (slug, options = {}) {
+  const { capitalize = true } = options
+
+  if (capitalize) {
+    return capitalCase(slug.replace(/_/g, ' '))
+  }
+
+  return slug.replace(/_/g, ' ')
 }
