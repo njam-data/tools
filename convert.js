@@ -1,5 +1,3 @@
-import toNumber from 'lodash/toNumber.js'
-
 /**
  * Convert an object's properties from strings to numbers where appropriate
  * @param {Object} [options]
@@ -12,14 +10,17 @@ export function convertNumberProperties (obj, options = {}) {
   const updatedObj = {}
   for (const key in obj) {
     const value = obj[key]
+    const parsed = parseFloat(value)
 
-    if (convertLeadingZeroStrings && value[0] === '0' && value.length > 1) {
+    if (isNaN(parsed)) {
       updatedObj[key] = value
     } else {
-      const parsed = toNumber(value)
-
-      if (isNaN(parsed)) {
-        updatedObj[key] = value
+      if (Number.isSafeInteger(parsed)) {
+        if (convertLeadingZeroStrings && value[0] === '0' && value.length > 1) {
+          updatedObj[key] = value
+        } else {
+          updatedObj[key] = parsed
+        }
       } else {
         updatedObj[key] = parsed
       }
@@ -39,7 +40,7 @@ export function convertEmptyStringsToNull (obj) {
   for (const key in obj) {
     const value = obj[key]
 
-    if (value && typeof value === 'string' && !value.length) {
+    if (typeof value === 'string' && !value.length) {
       updatedObj[key] = null
     } else {
       updatedObj[key] = value
