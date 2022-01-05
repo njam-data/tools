@@ -10,7 +10,7 @@ export function convertNumberProperties (obj, options = {}) {
   const updatedObj = {}
   for (const key in obj) {
     const value = obj[key]
-    const parsed = parseFloat(value)
+    const parsed = parseFloat(value.replace(/,/g, ''))
 
     if (isNaN(parsed)) {
       updatedObj[key] = value
