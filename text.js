@@ -15,6 +15,10 @@ export function slugify (str, options = {}) {
     options.separator = '_'
   }
 
+  if (!str) {
+    return str
+  }
+
   return slug(str, options)
 }
 

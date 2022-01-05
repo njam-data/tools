@@ -13,6 +13,7 @@ test('convertNumberProperties', () => {
 		millionsDecimal: '1,000,000.05'
 	}
 
+	const converted = convertNumberProperties(obj)
 	assert.equal(converted.wholeNumber, 100)
 	assert.equal(converted.decimal, 0.05)
 	assert.equal(converted.thousands, 100000)

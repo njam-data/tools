@@ -12,6 +12,15 @@ test('slugify & unslugify', () => {
 
   const lowercase = unslugify('hello_this_is_text', { capitalize: false })
   assert.equal(lowercase, 'hello this is text')
+
+  const nil = slugify(null)
+  assert.equal(nil, null)
+
+  const notDefined = slugify(undefined)
+  assert.equal(notDefined, undefined)
+
+  const emptyString = slugify('')
+  assert.equal(emptyString, '')
 })
 
 test.run()
