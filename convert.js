@@ -5,14 +5,16 @@
  * @returns {Object}
  */
 export function convertNumberProperties (obj, options = {}) {
-  const { convertLeadingZeroStrings = true } = options
+  const { convertLeadingZeroStrings = true, exclude = [] } = options
 
   const updatedObj = {}
   for (const key in obj) {
     const value = obj[key]
     const parsed = parseFloat(value.replace(/,/g, ''))
 
-    if (isNaN(parsed)) {
+    if (exclude.includes(key)) {
+      updatedObj[key] = value
+    } else if (isNaN(parsed)) {
       updatedObj[key] = value
     } else {
       if (Number.isSafeInteger(parsed)) {
@@ -35,12 +37,16 @@ export function convertNumberProperties (obj, options = {}) {
  * @param {Object} obj
  * @returns {Object}
  */
-export function convertEmptyStringsToNull (obj) {
+export function convertEmptyStringsToNull (obj, options = {}) {
+  const { exclude = [] } = options
   const updatedObj = {}
+
   for (const key in obj) {
     const value = obj[key]
 
-    if (typeof value === 'string' && !value.length) {
+    if (exclude.includes(key)) {
+      updatedObj[key] = value
+    } else if (typeof value === 'string' && !value.length) {
       updatedObj[key] = null
     } else {
       updatedObj[key] = value
