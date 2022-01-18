@@ -10,21 +10,26 @@ export function convertNumberProperties (obj, options = {}) {
   const updatedObj = {}
   for (const key in obj) {
     const value = obj[key]
-    const parsed = parseFloat(value.replace(/,/g, ''))
 
     if (exclude.includes(key)) {
       updatedObj[key] = value
-    } else if (isNaN(parsed)) {
+    } else if (!value) {
       updatedObj[key] = value
     } else {
-      if (Number.isSafeInteger(parsed)) {
-        if (convertLeadingZeroStrings && value[0] === '0' && value.length > 1) {
-          updatedObj[key] = value
+      const parsed = parseFloat(value.replace(/,/g, ''))
+
+      if (isNaN(parsed)) {
+        updatedObj[key] = value
+      } else {
+        if (Number.isSafeInteger(parsed)) {
+          if (convertLeadingZeroStrings && value[0] === '0' && value.length > 1) {
+            updatedObj[key] = value
+          } else {
+            updatedObj[key] = parsed
+          }
         } else {
           updatedObj[key] = parsed
         }
-      } else {
-        updatedObj[key] = parsed
       }
     }
   }

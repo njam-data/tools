@@ -11,7 +11,9 @@ test('convertNumberProperties', () => {
 		thousandsDecimal: '100,000.05',
 		millions: '1,000,000',
 		millionsDecimal: '1,000,000.05',
-		ignore: '2019-11'
+		ignore: '2019-11',
+		nil: null,
+		emptyString: ''
 	}
 
 	const converted = convertNumberProperties(obj, { exclude: ['ignore'] })
@@ -22,6 +24,8 @@ test('convertNumberProperties', () => {
 	assert.equal(converted.millions, 1000000)
 	assert.equal(converted.millionsDecimal, 1000000.05)
 	assert.equal(converted.ignore, '2019-11')
+	assert.equal(converted.nil, null)
+	assert.equal(converted.emptyString, '')
 })
 
 test('convertEmptyStringsToNull', () => {
