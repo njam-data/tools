@@ -25,7 +25,7 @@ export async function writeJson (filepath, data, options = {}) {
   }
 
   try {
-    fs.writeFile(filepath, str)
+    return fs.writeFile(filepath, str)
   } catch (err) {
     throw new Error(`Error writing json file: \n${err}`)
   }
